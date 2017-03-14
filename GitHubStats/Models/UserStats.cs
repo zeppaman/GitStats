@@ -10,5 +10,8 @@ namespace GitHubStats.Models
     public class UserStats
     {
        public IReadOnlyList<Repository> Repositories { get; set; }
+
+       public string UserName { get; set; }
+
     }
 }

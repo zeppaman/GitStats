@@ -241,6 +241,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\freelancer.css" />
     <Content Include="Content\freelancer.min.css" />
+    <Content Include="Content\img\analytics.png" />
     <Content Include="Content\img\portfolio\cabin.png" />
     <Content Include="Content\img\portfolio\cake.png" />
     <Content Include="Content\img\portfolio\circus.png" />
