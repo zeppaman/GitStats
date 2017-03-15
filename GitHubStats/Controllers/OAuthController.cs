@@ -81,7 +81,11 @@ namespace GitHubStats.Controllers
                 Response.Write(exc.Message);
                 Response.Write(exc.StackTrace);
                 Response.End();
+                throw new Exception("Not reachable code");
             }
+
+
+            
         }
 
 
