@@ -27,6 +27,8 @@ namespace GitHubStats
 
               
                 var items = releases.GetAll(v.Id).Result;
+                var relase = client.Repository.Release.GetAll(v.Id);
+                var download=relase.Result[0].Assets[0].DownloadCount;
                 var latest = items[0];
                 Console.WriteLine(
                     "The latest release is tagged at {0} and is named {1}",

@@ -56,23 +56,32 @@ namespace GitHubStats.Controllers
         /// <returns></returns>
         public ActionResult Authorize(string code, string state)
         {
-            var client = AppConfig.Current.GetClient();
-
-            
-            if (String.IsNullOrEmpty(code))
-                return RedirectToAction("Index");
-
-            var expectedState = Session["CSRF:State"] as string;
-            if (state != expectedState) throw new InvalidOperationException("SECURITY FAIL!");
-            Session["CSRF:State"] = null;
-
-            var request = new OauthTokenRequest(AppConfig.Current.AppName, AppConfig.Current.ClientSecret, code);
-            var token = client.Oauth.CreateAccessToken(request).Result;
-            Session["OAuthToken"] = token.AccessToken;
+            try
+            {
+                var client = AppConfig.Current.GetClient();
 
 
+                if (String.IsNullOrEmpty(code))
+                    return RedirectToAction("Index");
 
-            return RedirectToAction("Index", "Stats");
+                var expectedState = Session["CSRF:State"] as string;
+                if (state != expectedState) throw new InvalidOperationException("SECURITY FAIL!");
+                Session["CSRF:State"] = null;
+
+                var request = new OauthTokenRequest(AppConfig.Current.AppName, AppConfig.Current.ClientSecret, code);
+                var token = client.Oauth.CreateAccessToken(request).Result;
+                Session["OAuthToken"] = token.AccessToken;
+
+
+
+                return RedirectToAction("Index", "Stats");
+            }
+            catch (Exception exc)
+            {
+                Response.Write(exc.Message);
+                Response.Write(exc.StackTrace);
+                Response.End();
+            }
         }
 
 

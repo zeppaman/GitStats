@@ -13,6 +13,12 @@ namespace GitHubStats.Controllers
         const string appName = "GItStats";
         static GitHubClient client = new GitHubClient(new ProductHeaderValue(appName));
 
+        public ActionResult Repository(string repoId)
+        {
+            return null;
+
+        }
+            
         // GET: Stats
         public ActionResult Index()
         {
@@ -20,18 +26,24 @@ namespace GitHubStats.Controllers
             if (accessToken != null)
             {
                 client.Credentials = new Credentials(accessToken);
+                
 
                 var repositories = client.Repository.GetAllForCurrent().Result;
+
+               
 
 
                 return View(new UserStats()
                 {
-                    Repositories = repositories
+                    Repositories = repositories,
+                    UserName= client.Credentials.Login
+
+
                 } );
 
                
             }
-            throw new Exception("NON ATTIVO");
+            return new RedirectResult("~/");
         }
 
 
