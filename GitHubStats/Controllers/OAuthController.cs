@@ -68,7 +68,7 @@ namespace GitHubStats.Controllers
                 if (state != expectedState) throw new InvalidOperationException("SECURITY FAIL!");
                 Session["CSRF:State"] = null;
 
-                var request = new OauthTokenRequest(AppConfig.Current.AppName, AppConfig.Current.ClientSecret, code);
+                var request = new OauthTokenRequest(AppConfig.Current.ClientId, AppConfig.Current.ClientSecret, code);
                 var token = client.Oauth.CreateAccessToken(request).Result;
                 Session["OAuthToken"] = token.AccessToken;
 
