@@ -14,7 +14,11 @@
 </head>
 <body>
     <div>
-        <h1 class="page-header">Welcome @Model.UserName</h1>
+        <h1 class="page-header">Welcome @Model.User.Name</h1>
+
+        <img src="@Model.User.AvatarUrl" />
+        <b> Total download:</b> @Model.TotalDownload
+        <h2>Repositories</h2>
         <table class="table table-bordered">
            
             <tr>

@@ -11,7 +11,10 @@ namespace GitHubStats.Models
     {
        public IReadOnlyList<Repository> Repositories { get; set; }
 
-       public string UserName { get; set; }
+       public User  User { get; set; }
+        public int TotalDownload { get; set; }
+
+        public int TotalStar { get; set; }
 
     }
 }
