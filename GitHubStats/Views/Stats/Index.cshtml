@@ -1,47 +1,147 @@
 ﻿@model GitHubStats.Models.UserStats
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml"; ;
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div>
-        <h1 class="page-header">Welcome @Model.User.Name</h1>
-
-        <img src="@Model.User.AvatarUrl" />
-        <b> Total download:</b> @Model.TotalDownload
-        <h2>Repositories</h2>
-        <table class="table table-bordered">
-           
-            <tr>
-                <th>Name</th>
-                <th>Issues Count</th>
-                <th>Pushed At</th>
-                <th>Updated At</th>
-
-            </tr>
-
-                @foreach (var item in Model.Repositories)
-            {
-                    <tr>
-                        <td>  @item.Name</td>
-                        <td>  @item.OpenIssuesCount</td>
-                        <td>  @item.PushedAt</td>
-                        <td>  @item.UpdatedAt</td>
-                    </tr>
-                }
-                   
-
-        </table>
-
+    <div class="jumbotron">
+        <h1>Welcome @Model.User.Name</h1>
+        <p>
+            Discover github statistic for your account!
+        </p>
     </div>
-</body>
-</html>
+
+<div class="row">
+    <div col-md-3 col-sm-6 col-xs-12>
+        <div class="row-fluid">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <img src="@Model.User.AvatarUrl" class="img-circle" width="200" />
+
+            </div>
+        </div>
+    </div>
+    <div col-md-9 col-sm-12 col-xs-12>
+        <dv class="row-fluid">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-download"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Total Download</span>
+                        <span class="info-box-number">@Model.TotalDownload</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-yellow"><i class="fa fa-star"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Stars</span>
+                        <span class="info-box-number">@Model.TotalStars</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Releases</span>
+                        <span class="info-box-number">@Model.TotalReleases</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+       
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-hdd-o"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Code Size</span>
+                    <span class="info-box-number">  @Model.DiskUsage<sub>&nbsp;KB</sub> </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+ 
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-orange"><i class="fa fa-users"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Folloers</span>
+                <span class="info-box-number">@Model.User.Followers</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+        <span class="info-box-icon bg-purple"><i class="fa fa-github-alt"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">Repositories</span>
+            <span class="info-box-number">@Model.Repositories.Count</span>
+        </div>
+        <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+</div>
+</div>
+    </div>
+
+
+<div class="row spacer"></div>
+    <div class="row ">
+        <div class="col-sm-12">
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h2 class="box-title">Repositories</h2>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th>Name</th>
+                            <th>Issues Count</th>
+                            <th>Pushed At</th>
+                            <th>Updated At</th>
+                            <th>Stars</th>
+                            <th>Code Size (KB)</th>
+                            <th>Releases</th>
+                            <th>Downloads</th>
+
+                        </tr>
+
+                        @foreach (var item in Model.Repositories)
+                       {
+                            <tr>
+                                <td>  @item.Repo.Name</td>
+                                <td>  @item.Repo.OpenIssuesCount</td>
+                                <td>  @item.Repo.PushedAt</td>
+                                <td>  @item.Repo.UpdatedAt</td>
+                                <td>  @item.Repo.StargazersCount</td>
+                                <td>@item.Repo.Size</td>
+                                <td>  @item.ReleasesCount</td>
+                                <td>  @item.TotalDownload</td>
+                            </tr>
+                        }
+
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>

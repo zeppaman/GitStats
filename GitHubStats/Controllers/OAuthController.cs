@@ -88,6 +88,17 @@ namespace GitHubStats.Controllers
             
         }
 
+        /// <summary>
+        /// code=92753cc957561014b8ef&state=%5BbKCBfYvK.%2BD_2dc0KLyy%243-
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Logout(string code, string state)
+        {
+            Session.Clear();
+            Session.Abandon();
+            return new RedirectResult("~/");
+        }
+
 
         public ActionResult Login()
         {
