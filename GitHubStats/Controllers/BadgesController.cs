@@ -32,6 +32,15 @@ namespace GitHubStats.Controllers
                 client.Credentials = new Credentials(accessToken);
             }
 
+    
+            var appUsername = ConfigurationManager.AppSettings["AppUsername"];
+            var appPassword = ConfigurationManager.AppSettings["AppPassword"];
+            if (!string.IsNullOrEmpty(appUsername) && !string.IsNullOrEmpty(appPassword))
+            {
+                var basicAuth = new Credentials(appUsername, appPassword);
+                client.Credentials = basicAuth;               
+            }
+
             var total = 0;
             var repository = client.Repository.Get(id).Result;
             foreach(var rel in client.Repository.Release.GetAll(id).Result)
