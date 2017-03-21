@@ -1,6 +1,7 @@
 ﻿using Octokit;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -23,7 +24,13 @@ namespace GitHubStats.Controllers
            if (id == 0) throw new Exception("Repository Id Missing");
             string url = "";
 
+            
             GitHubClient client = new GitHubClient(new ProductHeaderValue(global::GitHubStats.Controllers.AppConfig.Current.AppName));
+            var accessToken = ConfigurationManager.AppSettings["AnonymousToken"];
+            if (!string.IsNullOrEmpty( accessToken))
+            {
+                client.Credentials = new Credentials(accessToken);
+            }
 
             var total = 0;
             var repository = client.Repository.Get(id).Result;
