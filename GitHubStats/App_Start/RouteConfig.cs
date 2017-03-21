@@ -13,11 +13,18 @@ namespace GitHubStats
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("SVG", "{controller}/{action}/{id}.svg", new { controller = "Home", action = "Index",id=-10 });
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+
+
+
             );
+
+           
         }
     }
 }

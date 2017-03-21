@@ -121,11 +121,12 @@
                             <th>Code Size (KB)</th>
                             <th>Releases</th>
                             <th>Downloads</th>
+                            <th>Badges</th>
 
                         </tr>
 
                         @foreach (var item in Model.Repositories)
-                       {
+                        {
                             <tr>
                                 <td>  @item.Repo.Name</td>
                                 <td>  @item.Repo.OpenIssuesCount</td>
@@ -135,6 +136,7 @@
                                 <td>@item.Repo.Size</td>
                                 <td>  @item.ReleasesCount</td>
                                 <td>  @item.TotalDownload</td>
+                                <td><img src="/badges/RepositoryDownloads/@(item.Repo.Id).svg" /></td>
                             </tr>
                         }
 

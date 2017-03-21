@@ -220,6 +220,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BadgesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OAuthController.cs" />
@@ -1190,6 +1191,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\AdminLTE\img\" />
     <Folder Include="Src\" />
+    <Folder Include="Views\Badges\" />
     <Folder Include="Views\OAuth\" />
   </ItemGroup>
   <ItemGroup>
