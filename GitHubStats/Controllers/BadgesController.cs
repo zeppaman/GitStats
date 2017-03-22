@@ -26,21 +26,24 @@ namespace GitHubStats.Controllers
 
             
             GitHubClient client = new GitHubClient(new ProductHeaderValue(global::GitHubStats.Controllers.AppConfig.Current.AppName));
-            var accessToken = ConfigurationManager.AppSettings["AnonymousToken"];
-            if (!string.IsNullOrEmpty( accessToken))
+            var accessToken = Session["OAuthToken"] as string ?? ConfigurationManager.AppSettings["AnonymousToken"];
+
+            if (!string.IsNullOrEmpty(accessToken))
             {
                 client.Credentials = new Credentials(accessToken);
             }
-
-    
-            var appUsername = ConfigurationManager.AppSettings["AppUsername"];
-            var appPassword = ConfigurationManager.AppSettings["AppPassword"];
-            if (!string.IsNullOrEmpty(appUsername) && !string.IsNullOrEmpty(appPassword))
+            else
             {
-                var basicAuth = new Credentials(appUsername, appPassword);
-                client.Credentials = basicAuth;               
-            }
 
+
+                var appUsername = ConfigurationManager.AppSettings["AppUsername"];
+                var appPassword = ConfigurationManager.AppSettings["AppPassword"];
+                if (!string.IsNullOrEmpty(appUsername) && !string.IsNullOrEmpty(appPassword))
+                {
+                    var basicAuth = new Credentials(appUsername, appPassword);
+                    client.Credentials = basicAuth;
+                }
+            }
             var total = 0;
             var repository = client.Repository.Get(id).Result;
             foreach(var rel in client.Repository.Release.GetAll(id).Result)
