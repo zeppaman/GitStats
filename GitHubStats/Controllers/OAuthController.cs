@@ -74,7 +74,7 @@ namespace GitHubStats.Controllers
 
 
 
-                return RedirectToAction("Index", "Stats");
+               return new RedirectResult("~/Stats/");
             }
             catch (Exception exc)
             {
