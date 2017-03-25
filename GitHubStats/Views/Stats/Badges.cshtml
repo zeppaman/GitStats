@@ -14,46 +14,76 @@
     </ol>
 </section>
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="alert alert-info alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-info"></i> Alert!</h4>
-            Not implemented yet! Please open an issue to encourage working on it!
-        </div>
-    </div>
+
+<div class="alert alert-warning alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4><i class="icon fa fa-warning"></i>Do you need more badge?</h4>
+    Please open an issue on github and ask for it! I'll be proud to add a new one!
+    <a href="https://github.com/zeppaman/GitStats/issues">Open an issue to claim a new stat!</a>
 </div>
 
+<h3>Summary Badge</h3>
 <div class="row">
-    <div class="col-md-6">
+
+    <div class="col-md-12">
         <div class="box box-default">
             <div class="box-header with-border">
                 <i class="fa fa-warning"></i>
-                <h3 class="box-title">Number of download (Example)</h3>
+                <h3 class="box-title">Personal badge for <b> @Model.CurrentUser.Login</b> </h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <p>Copy and paste this snippet to have a badge</p>
-                <pre>
-                     http://github-stats.apphb.com/Badges/DownloadCount?format=jpg              
-                </pre>
+               
+                <div class="col-md-6">
+                    <iframe src="/badges/UserBadge?login=@(Model.CurrentUser.Login)" width="400" height="240" scrolling="no" frameBorder="0"></iframe>
+
+                </div><div class="col-md-6">
+
+
+
+    <h3>Html</h3>
+    <pre>&lt;iframe src="/badges/UserBadge?login=@(Model.CurrentUser.Login)" width="400" height="240"  scrolling="no" frameBorder="0" /&gt;</pre>
+
+
+
+</div>
             </div>
-        </div>
+
+            </div>
+
+
+   
     </div>
 
-    <div class="col-md-6">
-        <div class="box box-default">
-            <div class="box-header with-border">
-                <i class="fa fa-warning"></i>
-                <h3 class="box-title">Profile Badge (Example)</h3>
+         </div>  
+<h3>Number of Downloads</h3>
+            <!--- download count snippets-->
+            <div class="row">
+
+               
+                @foreach (var repo in Model.Repositories)
+                {
+                    <div class="col-md-6">
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <i class="fa fa-warning"></i>
+                                <h3 class="box-title">Number of download for <b> @repo.Name</b> <img src="@Model.BaseUrl/badges/RepositoryDownloads/@(repo.Id).svg" /></h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <p>Copy and paste this snippet to have a badge</p>
+                                <b>Url</b>
+                                <pre> @Model.BaseUrl/badges/RepositoryDownloads/@(repo.Id).svg  </pre>
+
+                                <b>Html</b>
+                                <pre>&lt;img src="@Model.BaseUrl/badges/RepositoryDownloads/@(repo.Id).svg"     /&gt;</pre>
+
+
+                                <b>Markdown</b>
+                                <pre>[![GitHub Analitycs - @repo.Name](@Model.BaseUrl/badges/RepositoryDownloads/@(repo.Id).svg)](@Model.BaseUrl/) </pre>
+
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <p>Copy and paste this snippet to have a badge</p>
-                <pre>
-                     http://github-stats.apphb.com/Badges/ProfileBadge?format=jpg              
-                </pre>
-            </div>
-        </div>
-    </div>
-</div>

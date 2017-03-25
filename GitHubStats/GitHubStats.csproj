@@ -233,6 +233,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RepoStats.cs" />
+    <Compile Include="Models\UserBadge.cs" />
     <Compile Include="Models\UserStats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1185,13 +1186,13 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Stats\Badges.cshtml" />
+    <Content Include="Views\Badges\UserBadge.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\AdminLTE\img\" />
     <Folder Include="Src\" />
-    <Folder Include="Views\Badges\" />
     <Folder Include="Views\OAuth\" />
   </ItemGroup>
   <ItemGroup>

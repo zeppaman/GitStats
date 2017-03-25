@@ -1,0 +1,179 @@
+﻿@model GitHubStats.Models.UserStats
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+
+    <link href="~/Content/font-awesome.min.css"  rel="stylesheet" type="text/css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/AdminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="~/Content/AdminLTE/css/AdminLTE.min.css">
+    <style>
+        body {
+           font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif
+        }
+        .container
+        {    border: 1px solid #0094ff;
+    width: 400px;
+    height: 237px;
+    margin: 0px;
+    padding: 0px;
+    background: #0094ff;
+    padding: 3px;
+        }
+        .header {
+            background: #0094ff;
+            color:white;
+            margin:0px;
+            height:50px;
+        }
+        h1 {
+            margin:0px;
+            height:30px;
+        }
+        .col-2
+        {
+            width:33.3%;
+            min-height:80px;
+        }
+
+        .col
+        {
+            border-right:1px solid #0094ff;
+            display:block ;
+            float:left;
+                padding: 0px;
+         }
+        .col:last-child
+        {
+            border-right:none;
+         }
+        .row
+        {
+            margin-top:30px;
+        }
+        .info-box {
+            width: 100%;
+            margin: 0px;
+            padding:0px;
+        }
+        .info-box-text {
+             position: absolute;
+    margin-top: -88px;
+    margin-left: 5px;
+    line-height:20px;
+        }
+           .info-box-number {
+                position: absolute;
+    margin-top: -21px;
+    margin-left: 5px;
+    line-height:20px;
+        }
+           div.row-fluid>div {
+    margin: 0px;
+    padding:0px;
+    overflow:hidden;
+    
+
+}
+     div.header   a {
+            color:white !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="@Model.User.Url"> <h1>&nbsp;<i class="fa fa-github-square" aria-hidden="true"></i> &nbsp;@Model.User.Login</h1></a>
+
+        </div>
+
+
+        <div class="row-fluid">
+            <div class="col col-2">
+                <div class="info-box info-box-icon bg-aqua">
+                    <span class=""><i class="fa fa-download"></i></span>
+
+                    <span class="info-box-text">Downloads</span>
+                    <span class="info-box-number">@Model.TotalDownload</span>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+
+            <div class="col col-2">
+                <div class="info-box info-box-icon bg-yellow">
+                    <span class=""><i class="fa fa-star"></i></span>
+
+                    <span class="info-box-text">Stars</span>
+                    <span class="info-box-number">@Model.TotalStars</span>
+
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col col-2">
+                <div class="info-box info-box-icon bg-green">
+                    <span class=""><i class="fa fa-shopping-cart"></i></span>
+
+                    <span class="info-box-text">Releases</span>
+                    <span class="info-box-number">@Model.TotalReleases</span>
+
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+
+
+            <div class="col col-2">
+                <div class="info-box info-box-icon bg-red">
+                    <span class=""><i class="fa fa-hdd-o"></i></span>
+
+                    <span class="info-box-text">Code Size</span>
+                    <span class="info-box-number">  @Model.DiskUsage<sub>&nbsp;KB</sub> </span>
+
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+
+
+            <div class="col col-2">
+                <div class="info-box info-box-icon bg-orange">
+                    <span class=""><i class="fa fa-users"></i></span>
+
+                    <span class="info-box-text">Folloers</span>
+                    <span class="info-box-number">@Model.User.Followers</span>
+
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+        </div>
+
+        <div class="col col-2">
+        <div class="info-box info-box-icon bg-purple">
+            <span class=""><i class="fa fa-github-alt"></i></span>
+           
+                <span class="info-box-text">Repositories</span>
+                <span class="info-box-number">@Model.Repositories.Count</span>
+        
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+           
+</div>
+</body>
+</html>
