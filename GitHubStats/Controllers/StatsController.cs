@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
 
 namespace GitHubStats.Controllers
 {
@@ -42,7 +43,7 @@ namespace GitHubStats.Controllers
                 return View(new BadgesOptions()
                 {
                     Repositories = repositories,
-                    BaseUrl = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port),
+                    BaseUrl = ConfigurationManager.AppSettings["BaseUrl"] as string ?? Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port),
                     CurrentUser= user
 
                 });
