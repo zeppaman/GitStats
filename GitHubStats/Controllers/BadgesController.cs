@@ -13,7 +13,6 @@ namespace GitHubStats.Controllers
 {
     public class BadgesController : Controller
     {
-        const string badgeTemplate = "https://img.shields.io/badge/{0}-{1}-{2}.svg";
         // GET: Badges
         public ActionResult Index()
         {
@@ -32,28 +31,70 @@ namespace GitHubStats.Controllers
             return View(userStats );
 
         }
+
+        const string badgeTemplate = "https://img.shields.io/badge/{0}-{1}-{2}.svg";
+
+        /// <summary>
+        /// Exposet method that coumpute count and produce images using shield.io service
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult RepositoryDownloads( long id=0)
         {
-            if (id == 0) throw new Exception("Repository Id Missing");
-            string url = "";
+            if (id == 0) throw new Exception("Repository Id Missing");            
+            int total=  GetDownloadCountForRepository(id);
+            string url = string.Format(badgeTemplate, "downloads", total, "orange");
+            return DownloadFile(url, "repositoryDownload.svg", true);
+
+        }
+
+        /// <summary>
+        /// Compute download count for a given repository id
+        /// Note: all assets of all versiona are summed together
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private int GetDownloadCountForRepository(long id)
+        {
+            int total = 0;
             GitHubClient client = GetClientForRequest(this);
-            var total = 0;
             var repository = client.Repository.Get(id).Result;
             foreach (var rel in client.Repository.Release.GetAll(id).Result)
             {
                 foreach (var asset in rel.Assets)
                 {
                     total += asset.DownloadCount;
-
                 }
             }
-
-            url = string.Format(badgeTemplate, "downloads", total, "orange");
-
-
-            return DownloadFile(url, "repositoryDownload.svg", true);
-
+            return total;
         }
+
+        /// <summary>
+        /// Generic methods that donwload  and serves files
+        /// </summary>
+        /// <param name="url"> url of file to be downloaded</param>
+        /// <param name="filename">name of file to be served</param>
+        /// <param name="inline">show inline or download as attachment</param>
+        /// <returns></returns>
+        private ActionResult DownloadFile(string url, string filename, bool inline)
+        {
+            WebClient client = new WebClient();
+            var bytes = client.DownloadData(url);
+            string contentType = MimeMapping.GetMimeMapping(filename);
+            var cd = new System.Net.Mime.ContentDisposition
+            {
+                FileName = filename,
+                Inline = inline,
+            };
+
+            Response.AppendHeader("Content-Disposition", cd.ToString());
+            return File(bytes, contentType);
+        }
+
+
+
+
+
 
         public static  GitHubClient GetClientForRequest(Controller context)
         {
@@ -81,25 +122,7 @@ namespace GitHubStats.Controllers
             return client;
         }
 
-        private ActionResult DownloadFile(string url,string filename, bool inline)
-        {
-         
-
-            WebClient client = new WebClient();
-            var bytes=client.DownloadData(url);
-          
-            string contentType = MimeMapping.GetMimeMapping(filename);
-
-            var cd = new System.Net.Mime.ContentDisposition
-            {
-                FileName = filename,
-                Inline = inline,
-            };
-
-            Response.AppendHeader("Content-Disposition", cd.ToString());
-
-            return File(bytes, contentType);
-        }
+       
     }
 
 }
